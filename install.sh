@@ -20,7 +20,14 @@ fi
 
 # Google Chrome
 if test ! $(which google-chrome-stable); then
-    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && dpkg -i google-chrome-stable_current_amd64.deb && rm google-chrome-stable_current_amd64.deb
+    wget -O chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && dpkg -i chrome.deb && rm chrome.deb
 else
     echo "Google Chrome already installed..."
+fi
+
+# Slack
+if test ! $(which slack); then
+    wget -O slack.deb  https://downloads.slack-edge.com/linux_releases/slack-desktop-3.0.0-amd64.deb && dpkg -i slack.deb && rm slack.deb
+else
+    echo "Slack already installed..."
 fi

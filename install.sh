@@ -2,6 +2,7 @@
 # Terminal
 # Set colors (https://github.com/Mayccoll/Gogh/blob/master/content/themes.md)
 #wget -O xt  http://git.io/v3DBV && chmod +x xt && ./xt && rm xt
+ln -sfv ~/.dotfiles/bash/.inputrc ~
 
 # Git
 if test ! $(which git); then

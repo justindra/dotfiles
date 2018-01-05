@@ -32,3 +32,10 @@ if test ! $(which slack); then
 else
     echo "Slack already installed..."
 fi
+
+# VSCode
+if test ! $(which code); then
+    wget -O vscode.deb https://go.microsoft.com/fwlink/?LinkID=760868 && dpkg -i vscode.deb && apt-get install -f && rm vscode.deb
+else
+    echo "VSCode already installed..."
+fi

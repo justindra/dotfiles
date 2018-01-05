@@ -39,3 +39,12 @@ if test ! $(which code); then
 else
     echo "VSCode already installed..."
 fi
+
+# i3
+if test ! $(which i3); then
+    apt install i3 -y
+    mkdir ~/.i3
+    ln -sfv ~/.dotfiles/i3/config ~/.i3/config
+else
+    echo "i3 already installed..."
+fi

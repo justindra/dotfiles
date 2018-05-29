@@ -1,5 +1,7 @@
 #!/bin/bash
+# Copyright (C) 2014 Julien Bonjean <julien@bonjean.info>
 # Copyright (C) 2014 Alexander Keller <github@nycroth.com>
+# Copyright (C) 2018 Justin Rahardjo <justindra@github>
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,14 +18,33 @@
 
 #------------------------------------------------------------------------
 
-INTERFACE="${BLOCK_INSTANCE:-wlan0}"
+# Use the provided interface, otherwise the device used for the default route.
+if [[ -n $BLOCK_INSTANCE ]]; then
+  INTERFACE=$BLOCK_INSTANCE
+else
+  INTERFACE=$(ip route | awk '/^default/ { print $5 ; exit }')
+fi
 
 #------------------------------------------------------------------------
 
 # As per #36 -- It is transparent: e.g. if the machine has no battery or wireless
 # connection (think desktop), the corresponding block should not be displayed.
-[[ ! -d /sys/class/net/${INTERFACE}/wireless ]] ||
-    [[ "$(cat /sys/class/net/$INTERFACE/operstate)" = 'down' ]] && exit
+[[ ! -d /sys/class/net/${INTERFACE} ]] && exit
+
+#------------------------------------------------------------------------
+
+if [[ ! -d /sys/class/net/${INTERFACE} ]]; then
+  NO_WIFI=true
+else
+  NO_WIFI=false
+fi
+
+if [[ "$(cat /sys/class/net/$INTERFACE/operstate)" = 'down' ]]; then
+  echo down # full text
+  echo down # short text
+  echo \#FF0000 # color
+  exit
+fi
 
 #------------------------------------------------------------------------
 
@@ -31,16 +52,59 @@ QUALITY=$(grep $INTERFACE /proc/net/wireless | awk '{ print int($3 * 100 / 70) }
 
 #------------------------------------------------------------------------
 
-echo $QUALITY% # full text
-echo $QUALITY% # short text
+case $1 in
+  -4)
+    AF=inet ;;
+  -6)
+    AF=inet6 ;;
+  *)
+    AF=inet6? ;;
+esac
 
+# if no interface is found, use the first device with a global scope
+IPADDR=$(ip addr show $IF | perl -n -e "/$AF ([^\/]+).* scope global/ && print \$1 and exit")
+
+#------------------------------------------------------------------------
+
+SSID_NAME=$(iwgetid -r)
+
+# You can put any urgent name so the block will give warning
+# if a network with this name is used, like public wifi or alike.
+# You can separate multiple values with \|
+URGENT_VALUE=""
+
+#------------------------------------------------------------------------
+
+# Echo out [ SSID (ip.addr.here) ]
+
+FULL_TEXT=""
+COLOR="#FFFFFF"
 # color
 if [[ $QUALITY -ge 80 ]]; then
-    echo "#00FF00"
+    COLOR="#00FF00"
 elif [[ $QUALITY -lt 80 ]]; then
-    echo "#FFF600"
+    COLOR="#FFF600"
 elif [[ $QUALITY -lt 60 ]]; then
-    echo "#FFAE00"
+    COLOR="#FFAE00"
 elif [[ $QUALITY -lt 40 ]]; then
-    echo "#FF0000"
+    COLOR="#FF0000"
+fi
+
+if [[ "$NO_WIFI" = false ]]; then
+    FULL_TEXT="<span color='${COLOR}'><span font='FontAwesome'></span><span> ${SSID_NAME} (${IPADDR})</span></span>"
+else
+    FULL_TEXT="<span color='${COLOR}'>${IPADDR}</span>"
+fi
+
+echo "${FULL_TEXT}"
+echo "${FULL_TEXT}"
+
+case $BLOCK_BUTTON in
+  3) echo -n "$IPADDR" | xclip -q -se c ;;
+esac
+
+if [[ "${SSID_NAME}" != "" ]]; then
+  if [[ "${URGENT_VALUE}" != "" ]] && [[ $(echo "${SSID_NAME}" | grep -we "${URGENT_VALUE}") != "" ]]; then
+    exit 33
+  fi
 fi

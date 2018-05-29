@@ -1,0 +1,36 @@
+#!/bin/bash
+
+BATTERY=0
+BATTERY_INFO=$(acpi -b | grep "Battery ${BATTERY}")
+BATTERY_STATE=$(echo "${BATTERY_INFO}" | grep -wo "Full\|Charging\|Discharging")
+BATTERY_POWER=$(echo "${BATTERY_INFO}" | grep -o '[0-9]\+%' | tr -d '%')
+
+URGENT_VALUE=10
+
+if [[ "${BATTERY_STATE}" = "Charging" ]]; then
+  echo "<span color='orange'><span font='FontAwesome'></span><span> ${BATTERY_POWER}%</span></span>"
+  echo "${BATTERY_POWER}%+"
+  echo ""
+elif [[ "${BATTERY_STATE}" = "Discharging" ]]; then
+  if [[ "${BATTERY_POWER}" -lt "80" ]]; then
+    echo "<span color='#FFFF66'><span font='FontAwesome'></span><span> ${BATTERY_POWER}%</span></span>"
+  elif [[ "${BATTERY_POWER}" -lt "55" ]]; then
+    echo "<span color='#FFCC00'><span font='FontAwesome'></span><span> ${BATTERY_POWER}%</span></span>"
+  elif [[ "${BATTERY_POWER}" -lt "30" ]]; then
+    echo "<span color='#FF6600'><span font='FontAwesome'></span><span> ${BATTERY_POWER}%</span></span>"
+  elif [[ "${BATTERY_POWER}" -lt "10" ]]; then
+    echo "<span color='#FFFFFF'><span font='FontAwesome'></span><span> ${BATTERY_POWER}%</span></span>"
+  else
+    echo "<span font='FontAwesome'></span><span> ${BATTERY_POWER}%</span>"
+  fi
+  echo "${BATTERY_POWER}%-"
+  echo ""
+else
+  echo "${BATTERY_POWER}%"
+  echo "${BATTERY_POWER}%"
+  echo ""
+fi
+
+if [[ "${BATTERY_POWER}" -le "${URGENT_VALUE}" ]]; then
+  exit 33
+fi

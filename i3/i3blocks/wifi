@@ -40,8 +40,8 @@ else
 fi
 
 if [[ "$(cat /sys/class/net/$INTERFACE/operstate)" = 'down' ]]; then
-  echo down # full text
-  echo down # short text
+  echo "No Connection Detected" # full text
+  echo "No Connection Detected" # short text
   echo \#FF0000 # color
   exit
 fi
@@ -73,6 +73,12 @@ SSID_NAME=$(iwgetid -r)
 # You can separate multiple values with \|
 URGENT_VALUE=""
 
+if [[ ! ${SSID_NAME} ]]; then
+  NO_WIFI=true
+else
+  NO_WIFI=false
+fi
+
 #------------------------------------------------------------------------
 
 # Echo out [ SSID (ip.addr.here) ]
@@ -93,7 +99,11 @@ fi
 if [[ "$NO_WIFI" = false ]]; then
     FULL_TEXT="<span color='${COLOR}'><span font='FontAwesome'></span><span> ${SSID_NAME} (${IPADDR})</span></span>"
 else
+  if [[ ! ${IPADDR} ]]; then
+    FULL_TEXT="<span color='red'>No Network Detected</span>"
+  else
     FULL_TEXT="<span color='${COLOR}'>${IPADDR}</span>"
+  fi
 fi
 
 echo "${FULL_TEXT}"

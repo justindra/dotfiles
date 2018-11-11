@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/home/justin/.dotfiles'
+let g:netrw_dirhist_2='/sys/devices/pci0000:00/0000:00:02.0/drm/card0/card0-eDP-1/intel_backlight/power'
+let g:netrw_dirhist_3='/home/justin/.dotfiles/scripts'
+let g:netrw_dirhist_4='/home/justin/.dotfiles/i3/i3blocks'

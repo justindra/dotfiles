@@ -7,3 +7,5 @@
     - { src: "~/.dotfiles/vim/.vim", dest: "~/.vim" }
     # Git Config Files
     - { src: "~/.dotfiles/git/.gitconfig", dest: "~/.gitconfig" }
+    # Link Bash Profile
+    - { src: "~/.dotfiles/bash/.bash_profile", dest: "~/.bash_profile" }

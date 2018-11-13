@@ -1,0 +1,19 @@
+---
+- name: Load Variables
+  include_vars: vars/macos.yml
+
+- name: Remove all unwanted Dock Items
+  shell: dockutil --remove "{{ item.key }}"
+  ignore_errors: true
+  with_dict: "{{dockitems_disabled}}" 
+
+- name: Set Dock Settings
+  osx_defaults: domain=com.apple.dock key={{ item.key }} type={{ item.type }} value={{ item.value }}
+  with_items:
+    # Set the icon size (px) of Dock Items
+    - { key: "tilesize", type: "float", value: "{{ dock_icon_size }}" }
+    # Speed up Mission Control animations
+    - { key: "expose-animation-duration", type: "float", value: "0.1" }
+  notify:
+    - Kill Dock
+

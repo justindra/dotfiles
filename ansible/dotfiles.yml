@@ -18,3 +18,11 @@
       tags:
         - packages
 
+    - include: tasks/macos_defaults.yml
+      when: ansible_os_family == "Darwin"
+      tags:
+        - macos_defaults
+
+  handlers:
+    - name: Kill Dock
+      command: killall Dock

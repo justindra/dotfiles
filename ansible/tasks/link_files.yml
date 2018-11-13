@@ -5,3 +5,5 @@
     # VIM Config Files
     - { src: "~/.dotfiles/vim/.vimrc", dest: "~/.vimrc" }
     - { src: "~/.dotfiles/vim/.vim", dest: "~/.vim" }
+    # Git Config Files
+    - { src: "~/.dotfiles/git/.gitconfig", dest: "~/.gitconfig" }

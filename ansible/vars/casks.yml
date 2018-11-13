@@ -1,0 +1,14 @@
+---
+casks:
+  # Browsers
+  google-chrome:
+  # Communications
+  slack:
+  zoomus:
+  microsoft-teams:
+  # Development
+  visual-studio-code:
+  sketch:
+  # Media
+  vlc:
+

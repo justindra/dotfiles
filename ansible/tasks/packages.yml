@@ -1,0 +1,66 @@
+---
+- name: Include brew taps list
+  include_vars: vars/taps.yml
+  tags:
+    - brew_taps
+
+- name: Include brew formulas
+  include_vars: vars/formulas.yml
+  tags:
+    - brew_formulas
+
+- name: Include brew casks list
+  include_vars: vars/casks.yml
+  tags:
+    - brew_cask
+
+- name: Include VS Code Extensions
+  include_vars: vars/vscode.yml
+  tags:
+    - vscode
+
+- block:
+  - name: Update/upgrade homebrew
+    homebrew: update_homebrew=yes upgrade_all=yes
+    tags:
+      - brew_taps
+      - brew_cask
+
+  - name: Manage Taps
+    homebrew_tap: name={{ item.key }} state={{ item.value.state | default("present") }}
+    with_dict: "{{taps}}"
+    tags:
+      - brew_taps
+
+  - name: Manage Formulas
+    homebrew: name={{ item.key }} install_options={{ item.value.options | default(omit) }} state={{ item.value.state | default("present") }}
+    with_dict: "{{formulas}}"
+    tags:
+      - brew_formulas
+
+
+  - name: Manage Casks
+    homebrew_cask: name={{ item.key }} state={{ item.value.state | default("present") }}
+    with_dict: "{{casks}}"
+    tags:
+      - brew_cask
+
+  when: ansible_os_family == "Darwin"
+
+- name: Install VSCode Extensions
+  shell: code --install-extension {{ item.key }} --force
+  with_dict: "{{vscode}}"
+  tags:
+    - vscode
+
+- name: Install NVM
+  shell: curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+  args:
+    creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
+
+- name: Install Node
+  shell: '. {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm install 10 && nvm alias default 10'
+  args:
+    creates: "{{ ansible_env.HOME }}/.nvm/versions/node"
+    chdir: "{{ ansible_env.HOME }}"
+    executable: /bin/bash

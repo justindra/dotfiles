@@ -14,6 +14,12 @@
   tags:
     - brew_cask
 
+- name: Include VS Code Extensions
+  include_vars: vars/vscode.yml
+  tags:
+    - vscode
+
+
 - block:
   - name: Update/upgrade homebrew
     homebrew: update_homebrew=yes upgrade_all=yes
@@ -41,3 +47,9 @@
       - brew_cask
 
   when: ansible_os_family == "Darwin"
+
+- name: Install VSCode Extensions
+  shell: code --install-extension {{ item.key }} --force
+  with_dict: "{{vscode}}"
+  tags:
+    - vscode

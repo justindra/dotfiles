@@ -7,5 +7,14 @@
       include_vars: ./vars.yml
       tags: always
 
-    - name: Make sure dotfiles are present
-      git: repo=https://github.com/justindra/dotfiles.git dest=~/.dotfiles
+   # - name: Make sure dotfiles are present
+   #   git: repo=https://github.com/justindra/dotfiles.git dest=~/.dotfiles
+
+    - include: tasks/link_files.yml
+      tags:
+        - links
+
+    - include: tasks/packages.yml
+      tags:
+        - packages
+

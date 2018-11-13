@@ -11,4 +11,5 @@ casks:
   sketch:
   # Media
   vlc:
-
+  # Utilities
+  karabiner-elements:

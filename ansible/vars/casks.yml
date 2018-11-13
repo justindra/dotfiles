@@ -8,6 +8,7 @@ casks:
   microsoft-teams:
   # Development
   visual-studio-code:
+  sketch:
   # Media
   vlc:
 

@@ -9,3 +9,5 @@
     - { src: "~/.dotfiles/git/.gitconfig", dest: "~/.gitconfig" }
     # Link Bash Profile
     - { src: "~/.dotfiles/bash/.bash_profile", dest: "~/.bash_profile" }
+    - { src: "~/.dotfiles/bash/.inputrc", dest: "~/.inputrc" }
+    - { src: "~/.dotfiles/bash/.zshrc", dest: "~/.zshrc" }

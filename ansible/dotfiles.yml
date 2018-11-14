@@ -18,6 +18,10 @@
       tags:
         - packages
 
+    - include: tasks/shells.yml
+      tags:
+        - shells
+
     - include: tasks/macos_defaults.yml
       when: ansible_os_family == "Darwin"
       tags:

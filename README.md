@@ -13,3 +13,8 @@ git clone
 
 * Add ansible config for Ubuntu and i3
 * Find and add an i3 Alternative for MacOS
+
+## Links
+
+* [https://ss64.com/osx/syntax-defaults.html] List of MacOS Default Settings
+

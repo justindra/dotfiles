@@ -1,2 +1,3 @@
 ---
 dock_icon_size: 40
+login_shell: /usr/local/bin/zsh

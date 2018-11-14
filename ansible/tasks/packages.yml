@@ -53,14 +53,14 @@
   tags:
     - vscode
 
-- name: Install NVM
-  shell: curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
-  args:
-    creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
+# - name: Install NVM
+#   shell: curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+#   args:
+#     creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
 
-- name: Install Node
-  shell: '. {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm install 10 && nvm alias default 10'
-  args:
-    creates: "{{ ansible_env.HOME }}/.nvm/versions/node"
-    chdir: "{{ ansible_env.HOME }}"
-    executable: /bin/bash
+# - name: Install Node
+#   shell: '. {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm install 10 && nvm alias default 10'
+#   args:
+#     creates: "{{ ansible_env.HOME }}/.nvm/versions/node"
+#     chdir: "{{ ansible_env.HOME }}"
+#     executable: /bin/bash

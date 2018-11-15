@@ -11,3 +11,4 @@
     - { src: "~/.dotfiles/bash/.bash_profile", dest: "~/.bash_profile" }
     - { src: "~/.dotfiles/bash/.inputrc", dest: "~/.inputrc" }
     - { src: "~/.dotfiles/bash/.zshrc", dest: "~/.zshrc" }
+    - { src: "~/.dotfiles/config/karabiner/karabiner.json", dest: "~/.config/karabiner/karabiner.json" }

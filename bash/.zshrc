@@ -1,4 +1,8 @@
 # Created by newuser for 5.6.2
 
-# Uncomment the following line to use case-sensitive completion.
-CASE_SENSITIVE="true"
+# Case insensitive matching
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+
+# Enable Autosuggestion
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+

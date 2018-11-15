@@ -3,3 +3,4 @@ formulas:
   dockutil:
   sstp-client:
   zsh:
+  zsh-autosuggestions:

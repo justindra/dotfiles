@@ -7,6 +7,7 @@
     - { src: "~/.dotfiles/vim/.vim", dest: "~/.vim" }
     # VS Code
     - { src: "~/.dotfiles/config/vscode/settings.json", dest: "~/Library/Application Support/Code/User/settings.json" }
+    - { src: "~/.dotfiles/config/vscode/keybindings.json", dest: "~/Library/Application Support/Code/User/keybindings.json" }
     # Git Config Files
     - { src: "~/.dotfiles/git/.gitconfig", dest: "~/.gitconfig" }
     # Link Bash Profile

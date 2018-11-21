@@ -2,7 +2,7 @@
 ZSH=$HOME/.local/share/oh-my-zsh
 
 # Set name of the theme to load.
-ZSH_THEME="bira"
+ZSH_THEME="avit"
 
 # Which plugins would you like to load?
 # See https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins

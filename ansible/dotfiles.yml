@@ -10,6 +10,26 @@
    # - name: Make sure dotfiles are present
    #   git: repo=git@github.com:justindra/dotfiles.git dest=~/.dotfiles
 
+    - name: Install oh-my-zsh
+      git: repo=https://github.com/robbyrussell/oh-my-zsh.git dest=~/.local/share/oh-my-zsh update=yes
+
+    - name: Create folder
+      file: path={{item}} state=directory
+      with_items:
+        # - "~/.cache/vim/"
+        # - "~/.cache/vim/tmp/"
+        # - "~/.cache/vim/undo/"
+        # - "~/.cache/wget/"
+        # - "~/.config/gtk-3.0"
+        # - "~/.config/i3/"
+        # - "~/.config/i3blocks/"
+        - "~/.config/karabiner/"
+        - "~/.config/vscode/"
+        - "~/.local/share/bash/"
+        - "~/.local/share/zsh/"
+        - "~/Projects/"
+        - "~/Library/Application Support/Code/User/"
+
     - include: tasks/link_files.yml
       tags:
         - links

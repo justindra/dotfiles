@@ -5,10 +5,14 @@
     # VIM Config Files
     - { src: "~/.dotfiles/vim/.vimrc", dest: "~/.vimrc" }
     - { src: "~/.dotfiles/vim/.vim", dest: "~/.vim" }
+    # VS Code
+    - { src: "~/.dotfiles/config/vscode/settings.json", dest: "~/Library/Application Support/Code/User/settings.json" }
     # Git Config Files
     - { src: "~/.dotfiles/git/.gitconfig", dest: "~/.gitconfig" }
     # Link Bash Profile
     - { src: "~/.dotfiles/bash/.bash_profile", dest: "~/.bash_profile" }
     - { src: "~/.dotfiles/bash/.inputrc", dest: "~/.inputrc" }
     - { src: "~/.dotfiles/bash/.zshrc", dest: "~/.zshrc" }
-    - { src: "~/.dotfiles/config/karabiner/karabiner.json", dest: "~/.config/karabiner/karabiner.json" }
+
+    # Link Karabiner (custom mac keyboard)
+    # - { src: "~/.dotfiles/config/karabiner/karabiner.json", dest: "~/.config/karabiner/karabiner.json" }

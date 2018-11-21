@@ -11,6 +11,7 @@ casks:
   visual-studio-code:
   sketch:
   # Media
+  dropbox:
   vlc:
   # Utilities
   karabiner-elements:

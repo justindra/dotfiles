@@ -219,6 +219,40 @@
                                 "type": "basic"
                             }
                         ]
+                    },
+                    {
+                        "description": "Command+C to Ctrl+C on Terminal",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "c",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "c",
+                                        "modifiers": "control"
+                                    }
+                                ],
+                                "type": "basic",
+                                "conditions": [
+                                    {
+                                      "type": "frontmost_application_unless",
+                                      "bundle_identifiers": [
+                                        "^org\\.vim\\.",
+                                        "^com.googlecode.iterm2"
+                                      ]
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 ]
             },

@@ -5,4 +5,4 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 # Enable Autosuggestion
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
+source ~/.bash_profile

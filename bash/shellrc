@@ -1,7 +1,7 @@
 # User configuration
 # test -e $HOME/.dotfiles/extra.shell && source $HOME/.dotfiles/extra.shell
 
-# source $HOME/.dotfiles/aliases
+source $HOME/.dotfiles/bash/aliases
 # NVM
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

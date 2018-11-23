@@ -1,0 +1,2 @@
+# List direcory contents
+alias ls='ls -lahG'

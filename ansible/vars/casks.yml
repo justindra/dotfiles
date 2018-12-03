@@ -11,6 +11,8 @@ casks:
   visual-studio-code:
   sketch:
   tunnelblick:
+  virtualbox:
+  vagrant:
   # Media
   dropbox:
   vlc:

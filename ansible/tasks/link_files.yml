@@ -14,6 +14,8 @@
     - { src: "~/.dotfiles/bash/.bash_profile", dest: "~/.bash_profile" }
     - { src: "~/.dotfiles/bash/.inputrc", dest: "~/.inputrc" }
     - { src: "~/.dotfiles/bash/.zshrc", dest: "~/.zshrc" }
+    # Link Tmux Config Files
+    - { src: "~/.dotfiles/tmux/.tmux.conf", dest: "~/.tmux.conf" }
 
     # Link Karabiner (custom mac keyboard)
     # - { src: "~/.dotfiles/config/karabiner/karabiner.json", dest: "~/.config/karabiner/karabiner.json" }

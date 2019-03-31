@@ -53,6 +53,12 @@
   tags:
     - vscode
 
+# 
+- name: Install Tmux Plugin Manager
+  git:
+    repo: 'https://github.com/tmux-plugins/tpm'
+    dest: ~/.tmux/plugins/tpm
+
 # - name: Install NVM
 #   shell: curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
 #   args:

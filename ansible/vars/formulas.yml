@@ -4,3 +4,5 @@ formulas:
   sstp-client:
   zsh:
   zsh-autosuggestions:
+  # Development
+  terraform:

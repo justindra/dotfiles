@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh configuration.
-ZSH=$HOME/.local/share/oh-my-zsh
+ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
 ZSH_THEME="avit"
@@ -7,11 +7,12 @@ ZSH_THEME="avit"
 # Which plugins would you like to load?
 # See https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins
 # plugins=(git git-extra python colored-man)
+plugins=(zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
 # History file settings
-HISTFILE=~/.local/share/zsh/zsh_history
+HISTFILE=~/.zsh_history
 setopt NO_HIST_VERIFY
 setopt APPEND_HISTORY # adds history
 setopt INC_APPEND_HISTORY SHARE_HISTORY  # adds history incrementally and share it across sessions
@@ -37,5 +38,5 @@ esac
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 # Enable Autosuggestion
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

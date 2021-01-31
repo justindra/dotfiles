@@ -68,7 +68,7 @@ myModMask       = mod4Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
-myWorkspaces = ["home", "work", "text", "chat", "media", "syst"] ++ map show [7..9]
+myWorkspaces = ["home", "work", "text", "chat", "media", "syst"] ++ map show [7..9] ++ ["<fn=2>\xf198</fn> Slack"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -155,14 +155,13 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     ++
 
     --
-    -- mod-[1..9], Switch to workspace N
-    -- mod-shift-[1..9], Move client to workspace N
+    -- mod-[1..9, 0], Switch to workspace N
+    -- mod-shift-[1..9, 0], Move client to workspace N
     --
     [((m .|. modm, k), windows $ f i)
-        | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
+        | (i, k) <- zip (XMonad.workspaces conf) ([xK_1 .. xK_9] ++ [xK_0])
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
     ++
-
     --
     -- mod-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
     -- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
@@ -179,6 +178,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((0, xF86XK_AudioLowerVolume),  spawn ("pactl -- set-sink-volume @DEFAULT_SINK@ -5%")) 
     , ((0, xF86XK_AudioRaiseVolume),  spawn ("pactl -- set-sink-volume @DEFAULT_SINK@ +5%"))
     , ((0, xK_Print),                 spawn ("shutter -s"))
+    , ((0, xF86XK_AudioPlay),         spawn ("playerctl play-pause"))
+    , ((0, xF86XK_AudioPrev),         spawn ("playerctl previous"))
+    , ((0, xF86XK_AudioNext),         spawn ("playerctl next"))
     ]
 
 
@@ -248,6 +250,8 @@ myLayout =
 --
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
+    -- Slack should always be on the Slack Workspace
+    , className =? "Slack"          --> doShift ( myWorkspaces !! 9 )
     , className =? "Gimp"           --> doFloat
     , className =? "Shutter"        --> doFloat
     , resource  =? "desktop_window" --> doIgnore
@@ -273,10 +277,10 @@ myEventHook = mempty
 myLogHook h = dynamicLogWithPP $
   xmobarPP {
     ppOutput = hPutStrLn h
-    , ppCurrent = xmobarColor "#DDCCBB" "" . wrap "[" "]"  -- Current workspace in xmobar
-    , ppVisible = xmobarColor "#DDCCBB" "" . wrap "" ""    -- Visible but not current workspace
-    , ppHidden = xmobarColor "#99865E" ""                  -- Hidden workspaces in xmobar
-    , ppHiddenNoWindows = xmobarColor "#99865E" ""         -- Hidden workspaces (no windows)
+    , ppCurrent = xmobarColor "#F3F4F5" "" . wrap "[" "]"  -- Current workspace in xmobar
+    , ppVisible = xmobarColor "#F3F4F5" "" . wrap "" ""    -- Visible but not current workspace
+    , ppHidden = xmobarColor "#F3F4F5" ""                  -- Hidden workspaces in xmobar
+    , ppHiddenNoWindows = xmobarColor "#676E7D" ""         -- Hidden workspaces (no windows)
     , ppTitle = xmobarColor "#DDCCBB" "" . shorten 80      -- Title of active window in xmobar
     , ppSep =  "<fc=#8A9C9E> :: </fc>"                     -- Separators in xmobar
     , ppUrgent = xmobarColor "#ff0000" "" . wrap "!" "!"   -- Urgent workspace

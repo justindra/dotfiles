@@ -19,6 +19,7 @@ import XMonad.Util.SpawnOnce
 
 -- Hooks
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 
 -- Layouts
@@ -266,7 +267,8 @@ myManageHook = composeAll
 -- return (All True) if the default handler is to be run afterwards. To
 -- combine event hooks use mappend or mconcat from Data.Monoid.
 --
-myEventHook = mempty
+-- Make sure handle Full screen events from the browser
+myEventHook =  handleEventHook def <+> fullscreenEventHook
 
 ------------------------------------------------------------------------
 -- Status bars and logging
@@ -308,7 +310,7 @@ myStartupHook = do
 main = do
   -- start Xmobar process
   xmproc <- spawnPipe "xmobar -x 0 /home/justin/.config/xmobar/xmobar.config"
-  xmonad $ docks def {
+  xmonad $ docks $ ewmh def {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,

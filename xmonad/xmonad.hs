@@ -255,6 +255,8 @@ myManageHook = composeAll
     , className =? "Slack"          --> doShift ( myWorkspaces !! 9 )
     , className =? "Gimp"           --> doFloat
     , className =? "Shutter"        --> doFloat
+    -- Chrome pop-up windows should just float
+    , className =? "Google-chrome" <&&> stringProperty "WM_WINDOW_ROLE" =? "pop-up"        --> doFloat
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ]
 

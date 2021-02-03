@@ -254,6 +254,7 @@ myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     -- Slack should always be on the Slack Workspace
     , className =? "Slack"          --> doShift ( myWorkspaces !! 9 )
+    , className =? "Spotify"        --> doShift ( myWorkspaces !! 8 )
     , className =? "Gimp"           --> doFloat
     , className =? "Shutter"        --> doFloat
     -- Chrome pop-up windows should just float
@@ -313,7 +314,7 @@ myStartupHook = do
 main = do
   -- start Xmobar process
   xmproc <- spawnPipe "xmobar -x 0 /home/justin/dotfiles/xmonad/xmobar/xmobar.config"
-  xmonad $ docks $ ewmh $ withUrgencyHook NoUrgencyHook def {
+  xmonad $ withUrgencyHook NoUrgencyHook $ docks $ ewmh def {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,

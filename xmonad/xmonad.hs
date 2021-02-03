@@ -21,6 +21,7 @@ import XMonad.Util.SpawnOnce
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.UrgencyHook
 
 -- Layouts
 import XMonad.Layout.NoBorders (noBorders, smartBorders)
@@ -311,8 +312,8 @@ myStartupHook = do
 --
 main = do
   -- start Xmobar process
-  xmproc <- spawnPipe "xmobar -x 0 /home/justin/.config/xmobar/xmobar.config"
-  xmonad $ docks $ ewmh def {
+  xmproc <- spawnPipe "xmobar -x 0 /home/justin/dotfiles/xmonad/xmobar/xmobar.config"
+  xmonad $ docks $ ewmh $ withUrgencyHook NoUrgencyHook def {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,

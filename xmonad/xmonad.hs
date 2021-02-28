@@ -21,6 +21,7 @@ import XMonad.Util.SpawnOnce
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.UrgencyHook
 
 -- Layouts
@@ -51,10 +52,6 @@ myFocusFollowsMouse = False
 -- Whether clicking on a window to focus also passes the click to the window
 myClickJustFocuses :: Bool
 myClickJustFocuses = False
-
--- Width of the window border in pixels.
---
-myBorderWidth   = 2
 
 -- modMask lets you specify which modkey you want to use. The default
 -- is mod1Mask ("left alt").  You may also consider using mod3Mask
@@ -235,7 +232,7 @@ green       = "#859900"
 -- sizes
 gap         = 10
 topbar      = 10
-border      = 0
+border      = 2
 prompt      = 20
 status      = 20
 delta       = 1/10
@@ -307,16 +304,16 @@ myLayoutHook =
 -- To match on the WM_NAME, you can use 'title' in the same way that
 -- 'className' and 'resource' are used below.
 --
-myManageHook = composeAll
-    [ className =? "MPlayer"        --> doFloat
+myManageHook = composeOne
+    [ className =? "MPlayer"        -?> doFloat
     -- Slack should always be on the Slack Workspace
-    , className =? "Slack"          --> doShift ( myWorkspaces !! 9 )
-    , className =? "Gimp"           --> doFloat
-    , className =? "Shutter"        --> doFloat
+    , className =? "Slack"          -?> doShift ( myWorkspaces !! 9 )
+    , className =? "Gimp"           -?> doFloat
+    , className =? "Shutter"        -?> doFloat
     -- Chrome pop-up windows should just float
-    , className =? "Google-chrome" <&&> stringProperty "WM_WINDOW_ROLE" =? "pop-up"        --> doFloat
-    , resource  =? "desktop_window" --> doIgnore
-    , resource  =? "kdesktop"       --> doIgnore ]
+    , className =? "Google-chrome" <&&> stringProperty "WM_WINDOW_ROLE" =? "pop-up"        -?> doFloat
+    , resource  =? "desktop_window" -?> doIgnore
+    , resource  =? "kdesktop"       -?> doIgnore ]
 
 ------------------------------------------------------------------------
 -- Event handling
@@ -375,7 +372,7 @@ main = do
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
         clickJustFocuses   = myClickJustFocuses,
-        borderWidth        = myBorderWidth,
+        borderWidth        = border,
         modMask            = myModMask,
         workspaces         = myWorkspaces,
         normalBorderColor  = myNormalBorderColor,

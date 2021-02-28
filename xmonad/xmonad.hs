@@ -14,6 +14,7 @@ import Data.Monoid
 import System.Exit
 
 -- Utils
+import XMonad.Util.NamedScratchpad
 import XMonad.Util.Run
 import XMonad.Util.SpawnOnce
 
@@ -64,17 +65,25 @@ myModMask       = mod4Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
-myWorkspaces = ["home", "work", "text", "chat", "media", "syst"] ++ map show [7..9] ++ ["<fn=2>\xf198</fn> Slack"]
+myWorkspaces = ["home", "work", "text", "chat", "media", "syst"] ++ map show [7..9] ++ ["0"]
 
 -------------------------------------------------------------------------------
 -- Applications                                                              --
 -------------------------------------------------------------------------------
 myTerminal      = "gnome-terminal"
 
+slackCommand  = "slack"
+slackResource = "slack"
+isSlack       = (resource =? slackResource)
+
 spotifyCommand  = "spotify"
 spotifyInfix    = "Spotify"
 spotifyResource = "spotify"
 isSpotify       = (className =? "spotify")
+
+scratchpads = 
+  [ (NS "slack"  slackCommand isSlack defaultFloating)
+  ]
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
@@ -172,6 +181,12 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
     ++
 
+    -- Scratchpads
+    [
+      -- Open Chat app (Slack)
+      ((modm, xK_c),                  namedScratchpadAction scratchpads "slack")
+    ]
+    ++
     -- 
     -- Media Buttons (on Keychron K3)
     -- 
@@ -309,13 +324,16 @@ myLayoutHook =
 -- 'className' and 'resource' are used below.
 --
 myManageHook = 
-  manageSpecific
+      manageSpecific
+  <+> namedScratchpadManageHook scratchpads
   where
     manageSpecific = composeOne
-      -- Slack should always be on the Slack Workspace
-      [ className =? "Slack"          -?> doShift ( myWorkspaces !! 9 )
+      [
+        -- className =? "Slack"          -?> doShift ( myWorkspaces !! 9 )
       -- Shitter should always float
-      , className =? "Shutter"        -?> doFloat
+      className =? "Shutter"          -?> doFloat
+      -- Slack should always float as its a ScratchPad
+      , resource =? slackResource     -?> doFloat
       -- Chrome pop-up windows should just float
       , className =? "Google-chrome" <&&> stringProperty "WM_WINDOW_ROLE" =? "pop-up"        -?> doFloat
       , resource  =? "desktop_window" -?> doIgnore
@@ -374,7 +392,10 @@ myStartupHook = do
 main = do
   -- start Xmobar process
   xmproc <- spawnPipe "xmobar -x 0 /home/justin/dotfiles/xmonad/xmobar/xmobar.config"
-  xmonad $ withUrgencyHook NoUrgencyHook $ docks $ ewmh def {
+  xmonad
+    $ withUrgencyHook NoUrgencyHook
+    $ docks
+    $ ewmh def {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,

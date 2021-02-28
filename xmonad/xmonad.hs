@@ -24,11 +24,13 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.UrgencyHook
 
 -- Layouts
-import XMonad.Layout.NoBorders (noBorders, smartBorders)
+import XMonad.Layout.NoBorders (noBorders)
 import XMonad.Layout.Spacing
 import XMonad.Layout.ThreeColumns
 import XMonad.Layout.FixedColumn
+import XMonad.Layout.Gaps
 import XMonad.Layout.Named
+import XMonad.Layout.NoFrillsDecoration
 import XMonad.Layout.Renamed
 
 -- Keyboard
@@ -71,11 +73,6 @@ myModMask       = mod4Mask
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
 myWorkspaces = ["home", "work", "text", "chat", "media", "syst"] ++ map show [7..9] ++ ["<fn=2>\xf198</fn> Slack"]
-
--- Border colors for unfocused and focused windows, respectively.
---
-myNormalBorderColor  = "#dddddd"
-myFocusedBorderColor = "#ff0000"
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
@@ -217,23 +214,83 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = 
+
+base03  = "#002b36"
+base02  = "#073642"
+base01  = "#586e75"
+base00  = "#657b83"
+base0   = "#839496"
+base1   = "#93a1a1"
+base2   = "#eee8d5"
+base3   = "#fdf6e3"
+yellow  = "#b58900"
+orange  = "#cb4b16"
+red     = "#dc322f"
+magenta = "#d33682"
+violet  = "#6c71c4"
+blue    = "#268bd2"
+cyan    = "#2aa198"
+green       = "#859900"
+
+-- sizes
+gap         = 10
+topbar      = 10
+border      = 0
+prompt      = 20
+status      = 20
+delta       = 1/10
+
+-- Border colors for unfocused and focused windows, respectively.
+--
+myNormalBorderColor  = "#dddddd"
+myFocusedBorderColor = active
+
+active      = blue
+activeWarn  = red
+inactive    = base02
+focusColor  = blue
+unfocusColor = base02
+
+myFont      = "-*-terminus-medium-*-*-*-*-160-*-*-*-*-*-*"
+myBigFont   = "-*-terminus-medium-*-*-*-*-240-*-*-*-*-*-*"
+myWideFont  = "xft:Eurostar Black Extended:"
+            ++ "style=Regular:pixelsize=180:hinting=true"
+
+-- TopBar taken from https://github.com/altercation/dotfiles-tilingwm/blob/master/.xmonad/xmonad.hs
+topBarTheme = def
+    { fontName              = myFont
+    , inactiveBorderColor   = base03
+    , inactiveColor         = base03
+    , inactiveTextColor     = base03
+    , activeBorderColor     = active
+    , activeColor           = active
+    , activeTextColor       = active
+    , urgentBorderColor     = blue
+    , urgentTextColor       = yellow
+    , decoHeight            = topbar
+    }
+
+myLayoutHook = 
   renamed [CutWordsLeft 1] $
-  spacingRaw True (Border 0 10 10 10) True (Border 8 8 8 8) True $
   avoidStruts $
-  smartBorders $
-    tiled
-    ||| threeColumn
-    ||| Mirror tiled
+    threeColumn
     ||| noBorders Full
   where
-     -- default tiling algorithm partitions the screen into two panes
-     tiled   = named "Tiled" $ Tall 1 delta (1/2)
 
-     --  Three column with the centre being biggest
-     threeColumn = named "3 Column" $ ThreeColMid 1 delta (1/2)
-     -- Percent of screen to increment by when resizing panes
-     delta   = 10/100
+    -- Add the top bar to show which window is active
+    addTopBar   = noFrillsDeco shrinkText topBarTheme
+
+    mySpacing   = spacing gap
+    myGaps      = gaps [(U, gap),(D, gap),(L, gap),(R, gap)]
+
+    ---------------------------------------------------------------------------
+    -- 3 Columned Layout                                                     --
+    ---------------------------------------------------------------------------
+    threeColumn = named "3 Column"
+          $ addTopBar
+          $ myGaps
+          $ mySpacing
+          $ ThreeColMid 1 delta (1/2)
 
 ------------------------------------------------------------------------
 -- Window rules:
@@ -254,7 +311,6 @@ myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     -- Slack should always be on the Slack Workspace
     , className =? "Slack"          --> doShift ( myWorkspaces !! 9 )
-    , className =? "Spotify"        --> doShift ( myWorkspaces !! 8 )
     , className =? "Gimp"           --> doFloat
     , className =? "Shutter"        --> doFloat
     -- Chrome pop-up windows should just float
@@ -330,7 +386,7 @@ main = do
         mouseBindings      = myMouseBindings,
 
       -- hooks, layouts
-        layoutHook         = myLayout,
+        layoutHook         = myLayoutHook,
         manageHook         = myManageHook,
         handleEventHook    = myEventHook,
         logHook            = myLogHook xmproc,

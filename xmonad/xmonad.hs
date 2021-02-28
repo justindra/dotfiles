@@ -25,25 +25,20 @@ import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.UrgencyHook
 
 -- Layouts
-import XMonad.Layout.NoBorders (noBorders)
-import XMonad.Layout.Spacing
-import XMonad.Layout.ThreeColumns
 import XMonad.Layout.FixedColumn
 import XMonad.Layout.Gaps
 import XMonad.Layout.Named
+import XMonad.Layout.NoBorders (noBorders)
 import XMonad.Layout.NoFrillsDecoration
 import XMonad.Layout.Renamed
+import XMonad.Layout.Spacing
+import XMonad.Layout.ThreeColumns
 
 -- Keyboard
 import Graphics.X11.ExtraTypes.XF86
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
-
--- The preferred terminal program, which is used in a binding below and by
--- certain contrib modules.
---
-myTerminal      = "gnome-terminal"
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
@@ -70,6 +65,16 @@ myModMask       = mod4Mask
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
 myWorkspaces = ["home", "work", "text", "chat", "media", "syst"] ++ map show [7..9] ++ ["<fn=2>\xf198</fn> Slack"]
+
+-------------------------------------------------------------------------------
+-- Applications                                                              --
+-------------------------------------------------------------------------------
+myTerminal      = "gnome-terminal"
+
+spotifyCommand  = "spotify"
+spotifyInfix    = "Spotify"
+spotifyResource = "spotify"
+isSpotify       = (className =? "spotify")
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
@@ -268,10 +273,9 @@ topBarTheme = def
     }
 
 myLayoutHook = 
-  renamed [CutWordsLeft 1] $
-  avoidStruts $
-    threeColumn
-    ||| noBorders Full
+  renamed [CutWordsLeft 1]
+  $ avoidStruts
+  $ threeColumn ||| noBorders Full
   where
 
     -- Add the top bar to show which window is active
@@ -304,16 +308,18 @@ myLayoutHook =
 -- To match on the WM_NAME, you can use 'title' in the same way that
 -- 'className' and 'resource' are used below.
 --
-myManageHook = composeOne
-    [ className =? "MPlayer"        -?> doFloat
-    -- Slack should always be on the Slack Workspace
-    , className =? "Slack"          -?> doShift ( myWorkspaces !! 9 )
-    , className =? "Gimp"           -?> doFloat
-    , className =? "Shutter"        -?> doFloat
-    -- Chrome pop-up windows should just float
-    , className =? "Google-chrome" <&&> stringProperty "WM_WINDOW_ROLE" =? "pop-up"        -?> doFloat
-    , resource  =? "desktop_window" -?> doIgnore
-    , resource  =? "kdesktop"       -?> doIgnore ]
+myManageHook = 
+  manageSpecific
+  where
+    manageSpecific = composeOne
+      -- Slack should always be on the Slack Workspace
+      [ className =? "Slack"          -?> doShift ( myWorkspaces !! 9 )
+      -- Shitter should always float
+      , className =? "Shutter"        -?> doFloat
+      -- Chrome pop-up windows should just float
+      , className =? "Google-chrome" <&&> stringProperty "WM_WINDOW_ROLE" =? "pop-up"        -?> doFloat
+      , resource  =? "desktop_window" -?> doIgnore
+      , resource  =? "kdesktop"       -?> doIgnore ]
 
 ------------------------------------------------------------------------
 -- Event handling
@@ -324,8 +330,9 @@ myManageHook = composeOne
 -- return (All True) if the default handler is to be run afterwards. To
 -- combine event hooks use mappend or mconcat from Data.Monoid.
 --
--- Make sure handle Full screen events from the browser
-myEventHook =  handleEventHook def <+> fullscreenEventHook
+myEventHook =
+  -- Make sure handle Full screen events from the browser
+  handleEventHook def <+> fullscreenEventHook
 
 ------------------------------------------------------------------------
 -- Status bars and logging

@@ -386,7 +386,8 @@ myStartupHook = do
       spawnOnce "compton &"
       spawnOnce ".screenlayout/ultrawide.sh &"
       -- Run xflux for Revelstoke
-      spawnOnce "xflux -l 50.997051 -g -118.197823"
+      spawnOnce "xflux -l 50.997051 -g -118.197823 &"
+      spawnOnce "gnome-screensaver"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.

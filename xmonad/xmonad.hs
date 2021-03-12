@@ -154,7 +154,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- , ((modm              , xK_b     ), sendMessage ToggleStruts)
 
     -- Lock xmonad
-    , ((modm .|. shiftMask, xK_l     ), spawn "xscreensaver-command -lock")
+    , ((modm .|. shiftMask, xK_l     ), spawn "xdg-screensaver lock")
     -- Quit xmonad
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
 

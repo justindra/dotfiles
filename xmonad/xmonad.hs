@@ -207,7 +207,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- mod-button1, Set the window to floating mode and move by dragging
-    [ ((modm, button1), (\w -> focus w >> mouseMoveWindow w
+    [ ((modm .|. shiftMask, button1), (\w -> focus w >> mouseMoveWindow w
                                        >> windows W.shiftMaster))
 
     -- mod-button2, Raise the window to the top of the stack
@@ -382,7 +382,9 @@ myLogHook h = dynamicLogWithPP $
 myStartupHook = do
       spawnOnce "nitrogen --restore &"
       spawnOnce "compton &"
-      spawnOnce ".screenlayout/ultrawide.sh"
+      spawnOnce ".screenlayout/ultrawide.sh &"
+      -- Run xflux for Revelstoke
+      spawnOnce "xflux -l 50.997051 -g -118.197823"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.

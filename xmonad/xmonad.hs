@@ -27,7 +27,6 @@ import XMonad.Hooks.UrgencyHook
 
 -- Layouts
 import XMonad.Layout.FixedColumn
-import XMonad.Layout.Gaps
 import XMonad.Layout.Named
 import XMonad.Layout.NoBorders (noBorders)
 import XMonad.Layout.NoFrillsDecoration
@@ -306,8 +305,7 @@ myLayoutHook =
     -- Add the top bar to show which window is active
     addTopBar   = noFrillsDeco shrinkText topBarTheme
 
-    mySpacing   = spacing gap
-    myGaps      = gaps [(U, gap),(D, gap),(L, gap),(R, gap)]
+    mySpacing s = spacingRaw True (Border s s s s) True (Border 0 s s s) True
 
     ---------------------------------------------------------------------------
     -- 3 Columned Layout                                                     --
@@ -315,8 +313,7 @@ myLayoutHook =
     threeColumn = named "3 Column"
           $ windowNavigation
           $ addTopBar
-          $ myGaps
-          $ mySpacing
+          $ mySpacing gap
           $ subTabbed
           $ ThreeColMid 1 delta (1/2)
 

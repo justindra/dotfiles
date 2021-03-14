@@ -31,10 +31,14 @@ import XMonad.Layout.Named
 import XMonad.Layout.NoBorders (noBorders)
 import XMonad.Layout.NoFrillsDecoration
 import XMonad.Layout.Renamed
+import XMonad.Layout.Simplest
 import XMonad.Layout.Spacing
 import XMonad.Layout.SubLayouts
+import XMonad.Layout.Tabbed
 import XMonad.Layout.ThreeColumns
 import XMonad.Layout.WindowNavigation
+
+
 
 -- Keyboard
 import Graphics.X11.ExtraTypes.XF86
@@ -296,6 +300,16 @@ topBarTheme = def
     , decoHeight            = topbar
     }
 
+myTabTheme = def
+    { fontName              = myFont
+    , activeColor           = active
+    , inactiveColor         = base02
+    , activeBorderColor     = active
+    , inactiveBorderColor   = base02
+    , activeTextColor       = base03
+    , inactiveTextColor     = base00
+    }
+
 myLayoutHook = 
   renamed [CutWordsLeft 1]
   $ avoidStruts
@@ -305,16 +319,16 @@ myLayoutHook =
     -- Add the top bar to show which window is active
     addTopBar   = noFrillsDeco shrinkText topBarTheme
 
-    mySpacing s = spacingRaw True (Border s s s s) True (Border 0 s s s) True
-
+    mySpacing s = spacingRaw True (Border s s s s) False (Border s s s s) True
     ---------------------------------------------------------------------------
     -- 3 Columned Layout                                                     --
     ---------------------------------------------------------------------------
     threeColumn = named "3 Column"
           $ windowNavigation
           $ addTopBar
+          $ addTabs shrinkText myTabTheme
+          $ subLayout [] (Simplest)
           $ mySpacing gap
-          $ subTabbed
           $ ThreeColMid 1 delta (1/2)
 
 ------------------------------------------------------------------------

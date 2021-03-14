@@ -33,7 +33,9 @@ import XMonad.Layout.NoBorders (noBorders)
 import XMonad.Layout.NoFrillsDecoration
 import XMonad.Layout.Renamed
 import XMonad.Layout.Spacing
+import XMonad.Layout.SubLayouts
 import XMonad.Layout.ThreeColumns
+import XMonad.Layout.WindowNavigation
 
 -- Keyboard
 import Graphics.X11.ExtraTypes.XF86
@@ -132,6 +134,18 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Swap the focused window with the previous window
     , ((modm .|. shiftMask, xK_k     ), windows W.swapUp    )
 
+    -- Merge groups into tabs
+    , ((modm .|. controlMask, xK_h), sendMessage $ pullGroup L)
+    , ((modm .|. controlMask, xK_l), sendMessage $ pullGroup R)
+    , ((modm .|. controlMask, xK_k), sendMessage $ pullGroup U)
+    , ((modm .|. controlMask, xK_j), sendMessage $ pullGroup D)
+    -- Merge/unmerge all
+    , ((modm .|. controlMask, xK_m), withFocused (sendMessage . MergeAll))
+    , ((modm .|. controlMask, xK_u), withFocused (sendMessage . UnMerge))
+    -- Change focus into tab
+    , ((modm .|. controlMask, xK_period), onGroup W.focusUp')
+    , ((modm .|. controlMask, xK_comma), onGroup W.focusDown')
+
     -- Shrink the master area
     , ((modm,               xK_h     ), sendMessage Shrink)
 
@@ -140,12 +154,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Push window back into tiling
     , ((modm,               xK_t     ), withFocused $ windows . W.sink)
-
-    -- Increment the number of windows in the master area
-    , ((modm              , xK_comma ), sendMessage (IncMasterN 1))
-
-    -- Deincrement the number of windows in the master area
-    , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
 
     -- Toggle the status bar gap
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
@@ -305,9 +313,11 @@ myLayoutHook =
     -- 3 Columned Layout                                                     --
     ---------------------------------------------------------------------------
     threeColumn = named "3 Column"
+          $ windowNavigation
           $ addTopBar
           $ myGaps
           $ mySpacing
+          $ subTabbed
           $ ThreeColMid 1 delta (1/2)
 
 ------------------------------------------------------------------------
@@ -382,12 +392,10 @@ myLogHook h = dynamicLogWithPP $
 --
 -- By default, do nothing.
 myStartupHook = do
-      spawnOnce "nitrogen --restore &"
       spawnOnce "compton &"
-      spawnOnce ".screenlayout/ultrawide.sh &"
-      -- Run xflux for Revelstoke
-      spawnOnce "xflux -l 50.997051 -g -118.197823 &"
-      spawnOnce "gnome-screensaver"
+      spawnOnce ".screenlayout/ultrawide-dual.sh &"
+      -- Set the background, needs to be after screenlayout
+      spawnOnce "feh --bg-fill ~/Pictures/backgrounds/wallhaven-nkjre1.jpg"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.

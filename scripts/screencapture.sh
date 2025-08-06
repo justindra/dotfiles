@@ -3,7 +3,7 @@ TMPFILE="$(mktemp -t screencast-XXXXXXX).mkv"
 OUTPUT="$HOME/Pictures/Screencasts/$(date +%F-%H-%M-%S)"
 
 read -r X Y W H G ID < <(slop -f "%x %y %w %h %g %i")
-ffmpeg -f x11grab -s "$W"x"$H" -i :1.0+$X,$Y "$TMPFILE"
+ffmpeg -f x11grab -s "$W"x"$H" -i "$DISPLAY+$X,$Y" "$TMPFILE"
 
 notify-send 'generating palette'
 ffmpeg -y -i "$TMPFILE"  -vf fps=10,palettegen /tmp/palette.png

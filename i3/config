@@ -13,7 +13,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:System San Francisco Display 10
+font pango:Noto Sans 10
 
 # thin borders
 hide_edge_borders both
@@ -136,7 +136,7 @@ bindsym $mod+m move workspace to output left
 
 assign [class="Slack"] $workspace10
 
-bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -padding 100 -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 12" -fullscreen
+bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -padding 100 -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "Noto Sans 12" -fullscreen
 # Lock the computer
 bindsym $mod+Shift+x exec i3lock -c "2f343f"
 # reload the configuration file
@@ -223,13 +223,13 @@ bindsym Print exec ~/.dotfiles/scripts/screenshot.sh
 bindsym Ctrl+Print exec ~/.dotfiles/scripts/screencapture.sh
 bindsym Ctrl+Shift+Print exec killall ffmpeg
 
-# Compton to have opacity on rofi
-exec compton -f
+# Picom to have opacity on rofi
+exec picom -f
 
 exec --no-startup-id slack
 
 # Start Dropbox
-exec --no-startup-id ~/.dropbox-dist/dropboxd start
+# exec --no-startup-id ~/.dropbox-dist/dropboxd start
 
 # Start Redshift
 exec --no-startup-id redshift-gtk
@@ -238,7 +238,7 @@ exec --no-startup-id redshift-gtk
 exec --no-startup-id ~/.dotfiles/scripts/i3-battery-popup -n -L 20
 
 # Start Touchpad Indicator (Automatically disables touchpad on mouse plugged in)
-exec --no-startup-id touchpad-indicator
+# exec --no-startup-id touchpad-indicator
 
 # Make sure zoom is in a floating window
 for_window [class="zoom" instance="zoom" title="Zoom -.*"] floating enable

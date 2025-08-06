@@ -7,7 +7,7 @@ ZSH_THEME="avit"
 # Which plugins would you like to load?
 # See https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins
 # plugins=(git git-extra python colored-man)
-plugins=(zsh-autosuggestions)
+plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 

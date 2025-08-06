@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Run caps-escape script to map Caps Lock to Escape
+/home/justin/.dotfiles/scripts/caps-escape.sh

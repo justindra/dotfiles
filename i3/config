@@ -235,7 +235,7 @@ exec --no-startup-id slack
 exec --no-startup-id redshift-gtk
 
 # Start Battery Popup Notification
-exec --no-startup-id ~/.dotfiles/scripts/i3-battery-popup -n -L 20
+exec --no-startup-id "pgrep -f i3-battery-popup || ~/.dotfiles/scripts/i3-battery-popup -n -L 20"
 
 # Start Touchpad Indicator (Automatically disables touchpad on mouse plugged in)
 # exec --no-startup-id touchpad-indicator

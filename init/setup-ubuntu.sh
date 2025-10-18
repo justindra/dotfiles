@@ -98,4 +98,24 @@ if command -v gnome-terminal >/dev/null 2>&1; then
 fi
 
 echo ""
+echo "[i] Installing nvm (Node Version Manager)..."
+if [ ! -d "$HOME/.nvm" ]; then
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    echo "[✓] nvm installed"
+else
+    echo "[✓] nvm already installed"
+fi
+
+echo ""
+echo "[i] Installing pnpm..."
+if ! command -v pnpm >/dev/null 2>&1; then
+    curl -fsSL https://get.pnpm.io/install.sh | sh -
+    echo "[✓] pnpm installed"
+else
+    echo "[✓] pnpm already installed"
+fi
+
+echo ""
 echo "[i] Done."

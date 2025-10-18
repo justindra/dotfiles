@@ -92,4 +92,10 @@ else
 fi
 
 echo ""
+if command -v gnome-terminal >/dev/null 2>&1; then
+    echo "[i] Configuring gnome-terminal..."
+    "$DOTFILES_DIR/scripts/configure-gnome-terminal.sh"
+fi
+
+echo ""
 echo "[i] Done."

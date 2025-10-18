@@ -19,7 +19,7 @@ cd ~/.dotfiles
 Install required packages:
 
 ```bash
-sudo apt install zsh i3blocks xclip shutter
+sudo apt install zsh i3blocks xclip shutter fonts-font-awesome fonts-noto
 ```
 
 Install oh-my-zsh:

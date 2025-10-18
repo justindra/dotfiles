@@ -14,6 +14,22 @@ cd ~/.dotfiles
 
 ### Ubuntu
 
+#### Prerequisites
+
+Install required packages:
+
+```bash
+sudo apt install zsh i3blocks
+```
+
+Install oh-my-zsh:
+
+```bash
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+
+#### Setup
+
 ```bash
 git clone <repository-url> ~/.dotfiles
 cd ~/.dotfiles
@@ -25,6 +41,7 @@ The Ubuntu setup script will:
 - Backup any existing dotfiles before linking
 - Create symlinks for: vim, VS Code, git, bash/zsh, tmux, i3, opencode, and .xprofile
 - Create necessary directories if they don't exist
+- Change default shell to zsh (if installed)
 
 ## TODO
 

@@ -77,4 +77,19 @@ create_symlink "$DOTFILES_DIR/config/opencode/command" "$HOME/.config/opencode/c
 
 echo ""
 echo "[✓] Dotfiles linked successfully!"
+
+echo ""
+if command -v zsh >/dev/null 2>&1; then
+    if [ "$SHELL" != "$(which zsh)" ]; then
+        echo "[i] Changing default shell to zsh..."
+        chsh -s "$(which zsh)"
+        echo "[✓] Default shell changed to zsh. Please log out and log back in for changes to take effect."
+    else
+        echo "[✓] Default shell is already zsh"
+    fi
+else
+    echo "[!] WARNING: zsh is not installed. Please install it with: sudo apt install zsh"
+fi
+
+echo ""
 echo "[i] Done."

@@ -67,6 +67,9 @@ create_symlink "$DOTFILES_DIR/i3/settings.ini" "$HOME/.config/gtk-3.0/settings.i
 
 create_symlink "$DOTFILES_DIR/.xprofile" "$HOME/.xprofile"
 
+create_symlink "$DOTFILES_DIR/opencode/opencode.json" "$HOME/.config/opencode/opencode.json"
+create_symlink "$DOTFILES_DIR/opencode/command" "$HOME/.config/opencode/command"
+
 echo ""
 echo "[✓] Dotfiles linked successfully!"
 echo "[i] Done."

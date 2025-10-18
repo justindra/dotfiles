@@ -49,6 +49,8 @@ echo ""
 echo "[i] Linking dotfiles..."
 echo ""
 
+create_symlink "$DOTFILES_DIR" "$HOME/.dotfiles"
+
 create_symlink "$DOTFILES_DIR/vim/.vimrc" "$HOME/.vimrc"
 create_symlink "$DOTFILES_DIR/vim/.vim" "$HOME/.vim"
 

@@ -2,7 +2,7 @@
 # Any customization should be done in ~/.gtkrc-2.0.mine instead.
 
 include "/home/justin/.gtkrc-2.0.mine"
-gtk-theme-name="Raleigh"
+gtk-theme-name="Adwaita-dark"
 gtk-icon-theme-name="hicolor"
 gtk-font-name="System San Francisco Display 11"
 gtk-cursor-theme-name="Adwaita"

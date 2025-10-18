@@ -19,7 +19,7 @@ cd ~/.dotfiles
 Install required packages:
 
 ```bash
-sudo apt install zsh i3blocks
+sudo apt install zsh i3blocks xclip shutter
 ```
 
 Install oh-my-zsh:

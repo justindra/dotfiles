@@ -8,10 +8,13 @@ echo "[i] Starting Ubuntu dotfiles setup"
 
 backup_file() {
     local file="$1"
-    if [ -f "$file" ] && [ ! -h "$file" ]; then
+    if [ -h "$file" ]; then
+        echo "[i] Removing existing symlink $file"
+        rm "$file"
+    elif [ -f "$file" ]; then
         echo "[i] Backing up existing $file to ${file}_backup"
         mv "$file" "${file}_backup"
-    elif [ -d "$file" ] && [ ! -h "$file" ]; then
+    elif [ -d "$file" ]; then
         echo "[i] Backing up existing $file to ${file}_backup"
         mv "$file" "${file}_backup"
     fi
@@ -67,8 +70,8 @@ create_symlink "$DOTFILES_DIR/i3/settings.ini" "$HOME/.config/gtk-3.0/settings.i
 
 create_symlink "$DOTFILES_DIR/.xprofile" "$HOME/.xprofile"
 
-create_symlink "$DOTFILES_DIR/opencode/opencode.json" "$HOME/.config/opencode/opencode.json"
-create_symlink "$DOTFILES_DIR/opencode/command" "$HOME/.config/opencode/command"
+create_symlink "$DOTFILES_DIR/config/opencode/opencode.json" "$HOME/.config/opencode/opencode.json"
+create_symlink "$DOTFILES_DIR/config/opencode/command" "$HOME/.config/opencode/command"
 
 echo ""
 echo "[✓] Dotfiles linked successfully!"

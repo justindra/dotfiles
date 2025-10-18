@@ -6,6 +6,8 @@
     "javascript.updateImportsOnFileMove.enabled": "always",
     "breadcrumbs.enabled": true,
     "window.zoomLevel": 0,
+    "explorer.decorations.colors": true,
+    "explorer.decorations.badges": true,
     "[json]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     }

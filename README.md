@@ -23,7 +23,7 @@ cd ~/.dotfiles
 The Ubuntu setup script will:
 - Automatically detect the dotfiles directory location
 - Backup any existing dotfiles before linking
-- Create symlinks for: vim, VS Code, git, bash/zsh, tmux, i3, and .xprofile
+- Create symlinks for: vim, VS Code, git, bash/zsh, tmux, i3, opencode, and .xprofile
 - Create necessary directories if they don't exist
 
 ## TODO

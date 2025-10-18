@@ -4,10 +4,27 @@ These are my dotfiles-v2, instead of just using bash, I've decided to use ansibl
 
 ## To run
 
-```
-git clone
+### macOS
+
+```bash
+git clone <repository-url> ~/.dotfiles
+cd ~/.dotfiles
 ./init/setup.sh
 ```
+
+### Ubuntu
+
+```bash
+git clone <repository-url> ~/.dotfiles
+cd ~/.dotfiles
+./init/setup-ubuntu.sh
+```
+
+The Ubuntu setup script will:
+- Automatically detect the dotfiles directory location
+- Backup any existing dotfiles before linking
+- Create symlinks for: vim, VS Code, git, bash/zsh, tmux, i3, and .xprofile
+- Create necessary directories if they don't exist
 
 ## TODO
 

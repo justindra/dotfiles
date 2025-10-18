@@ -136,8 +136,9 @@ bindsym $mod+0 workspace $workspace10
 bindsym $mod+m move workspace to output left
 
 assign [class="Slack"] $workspace10
+assign [class="Beeper"] $workspace10
 
-bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -padding 100 -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "Noto Sans 12" -fullscreen
+bindsym $mod+d exec ~/.local/bin/phoenix.AppImage
 # Lock the computer
 bindsym $mod+Shift+x exec i3lock -c "2f343f"
 # reload the configuration file
@@ -229,6 +230,7 @@ bindsym Ctrl+Shift+Print exec killall ffmpeg
 exec picom -f
 
 exec --no-startup-id slack
+exec --no-startup-id ~/.local/bin/beeper.AppImage
 
 # Start Dropbox
 # exec --no-startup-id ~/.dropbox-dist/dropboxd start

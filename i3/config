@@ -233,7 +233,7 @@ exec --no-startup-id slack
 exec --no-startup-id ~/.local/bin/beeper.AppImage
 
 # Start Dropbox
-# exec --no-startup-id ~/.dropbox-dist/dropboxd start
+exec --no-startup-id dropbox start
 
 # Start Redshift
 exec --no-startup-id redshift-gtk

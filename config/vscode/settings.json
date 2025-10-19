@@ -8,6 +8,8 @@
     "window.zoomLevel": 0,
     "explorer.decorations.colors": true,
     "explorer.decorations.badges": true,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "[json]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     }

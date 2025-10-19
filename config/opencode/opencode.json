@@ -5,6 +5,7 @@
   "autoupdate": true,
   "permission": {
     "grep": "allow",
-    "rg": "allow"
+    "rg": "allow",
+    "sst deploy": "deny"
   }
 }

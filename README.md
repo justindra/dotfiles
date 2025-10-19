@@ -28,6 +28,13 @@ Install oh-my-zsh:
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
+Install Docker Desktop and Docker Compose:
+
+```bash
+# Follow the official Docker installation guide for Ubuntu:
+# https://docs.docker.com/desktop/install/ubuntu/
+```
+
 #### Setup
 
 ```bash

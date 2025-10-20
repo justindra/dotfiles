@@ -2,6 +2,11 @@
 
 BATTERY=0
 BATTERY_INFO=$(acpi -b | grep "Battery ${BATTERY}")
+
+if [[ -z "${BATTERY_INFO}" ]] || [[ "${BATTERY_INFO}" == *"rate information unavailable"* ]]; then
+  exit 0
+fi
+
 BATTERY_STATE=$(echo "${BATTERY_INFO}" | grep -wo "Full\|Charging\|Discharging")
 BATTERY_POWER=$(echo "${BATTERY_INFO}" | grep -o '[0-9]\+%' | tr -d '%')
 

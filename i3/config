@@ -233,6 +233,7 @@ bindsym Ctrl+Shift+Print exec killall ffmpeg
 # Picom to have opacity on rofi
 exec_always --no-startup-id bash -c "pkill picom || true && picom -f --config ~/.dotfiles/config/picom/picom.conf"
 
+exec --no-startup-id bash -c "killall albert 2>/dev/null; albert"
 exec --no-startup-id slack
 exec --no-startup-id ~/.local/bin/beeper.AppImage
 

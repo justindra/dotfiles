@@ -251,5 +251,6 @@ exec --no-startup-id "pgrep -f i3-battery-popup || ~/.dotfiles/scripts/i3-batter
 
 # Make sure zoom is in a floating window
 for_window [class="zoom" instance="zoom" title="Zoom -.*"] floating enable
+for_window [class="zoom" title="Settings"] floating enable
 
 

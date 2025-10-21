@@ -75,6 +75,8 @@ create_symlink "$DOTFILES_DIR/.xprofile" "$HOME/.xprofile"
 create_symlink "$DOTFILES_DIR/config/opencode/opencode.json" "$HOME/.config/opencode/opencode.json"
 create_symlink "$DOTFILES_DIR/config/opencode/command" "$HOME/.config/opencode/command"
 
+create_symlink "$DOTFILES_DIR/config/xorg/kbd-caps-escape.conf" "$HOME/.config/xorg.conf.d/kbd-caps-escape.conf"
+
 echo ""
 echo "[✓] Dotfiles linked successfully!"
 

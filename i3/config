@@ -231,7 +231,7 @@ bindsym Ctrl+Print exec ~/.dotfiles/scripts/screencapture.sh
 bindsym Ctrl+Shift+Print exec killall ffmpeg
 
 # Picom to have opacity on rofi
-exec_always --no-startup-id "killall picom; picom -f --config ~/.dotfiles/config/picom/picom.conf"
+exec_always --no-startup-id bash -c "pkill picom || true && picom -f --config ~/.dotfiles/config/picom/picom.conf"
 
 exec --no-startup-id slack
 exec --no-startup-id ~/.local/bin/beeper.AppImage

@@ -1,4 +1,7 @@
 #!/bin/bash
 
+# Set dark theme for GTK applications
+export GTK_THEME=Adwaita:dark
+
 # Run caps-escape script to map Caps Lock to Escape
 /home/justin/.dotfiles/scripts/caps-escape.sh

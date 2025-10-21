@@ -1,16 +1,99 @@
 {
-    "editor.minimap.enabled": false,
-    "editor.insertSpaces": true,
-    "editor.tabSize": 2,
-    "typescript.updateImportsOnFileMove.enabled": "always",
-    "javascript.updateImportsOnFileMove.enabled": "always",
-    "breadcrumbs.enabled": true,
-    "window.zoomLevel": 0,
-    "explorer.decorations.colors": true,
-    "explorer.decorations.badges": true,
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "[json]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+"breadcrumbs.enabled": true,
+"window.zoomLevel": 0,
+  "editor.minimap.enabled": false,
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+  "explorer.autoReveal": "focusNoScroll",
+  "explorer.openEditors.visible": 0,
+  "explorer.decorations.colors": true,
+  "explorer.decorations.badges": true,
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "keyboard.dispatch": "keyCode",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.fontLigatures": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "terminal.integrated.profiles.linux": {
+    "bash": {
+      "path": "bash",
+      "args": ["-l"]
     }
+  },
+  "prettier.enableDebugLogs": true,
+  "prettier.resolveGlobalModules": true,
+  "git.autofetch": true,
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "json.schemas": [],
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "python.defaultInterpreterPath": "C:\\Users\\justi\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+  "editor.inlineSuggest.enabled": true,
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "githubPullRequests.pullBranch": "never",
+  "[astro]": {
+    "editor.defaultFormatter": "astro-build.astro-vscode"
+  },
+  "[python]": {
+    "editor.formatOnType": true
+  },
+  "settingsSync.ignoredExtensions": [
+    "svelte.svelte-vscode",
+    "ms-dotnettools.csdevkit"
+  ],
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": false,
+    "markdown": true,
+    "scminput": false,
+    "yaml": false
+  },
+  "workbench.panel.defaultLocation": "right",
+  "[handlebars]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.unicodeHighlight.allowedCharacters": {
+    "​": true
+  },
+  "svelte.enable-ts-plugin": true,
+  "remote.autoForwardPortsSource": "hybrid",
+  "workbench.colorTheme": "Default Dark+",
+  "github.copilot.editor.enableAutoCompletions": true,
+  "window.commandCenter": false,
+  "editor.unicodeHighlight.ambiguousCharacters": false,
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "cSpell.enabledNotifications": {
+    "Average Word Length too Long": false,
+    "Lines too Long": false,
+    "Maximum Word Length Exceeded": false
+  },
+  "terminal.integrated.allowedLinkSchemes": [
+    "file",
+    "http",
+    "https",
+    "mailto",
+    "vscode",
+    "vscode-insiders",
+    "docker-desktop"
+  ]
 }

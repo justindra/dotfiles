@@ -66,7 +66,11 @@ get_output_device() {
   local node_name=$(wpctl inspect @DEFAULT_AUDIO_SINK@ 2>/dev/null | grep "node.name" | sed 's/.*node.name = "\(.*\)"/\1/')
   
   local icon="🔊"
-  if echo "$device_desc $node_name" | grep -qi "hdmi"; then
+  # Any bluetooth speaker will show the headphone icon
+  if echo "$node_name" | grep -qi "bluez"; then
+    icon="🎧"
+  # Monitor output
+  elif echo "$device_desc $node_name" | grep -qi "hdmi"; then
     icon="🖥️"
   elif echo "$device_desc $node_name" | grep -qi "headphone\|headset"; then
     icon="🎧"
